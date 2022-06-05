@@ -1,0 +1,17 @@
+service: hello-world
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  deploymentMethod: direct
+  #deploymentMethod: changesets
+  runtime: python3.8
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+
