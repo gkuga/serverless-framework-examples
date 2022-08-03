@@ -1,0 +1,16 @@
+service: goodbye-app
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  goodbye:
+    handler: handler.goodbye
+    environment:
+        HELLO_API_URL: ${param:apiUrl}
+    events:
+      - httpApi:
+          path: /
+          method: get

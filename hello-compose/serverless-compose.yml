@@ -1,0 +1,7 @@
+services:
+  hello-app:
+    path: hello-app
+  goodbye-app:
+    path: goodbye-app
+    params:
+      apiUrl: ${hello-app.HttpApiUrl}
