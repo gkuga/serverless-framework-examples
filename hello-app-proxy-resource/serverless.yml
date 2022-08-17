@@ -1,0 +1,36 @@
+service: hello-world
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  #deploymentMethod: direct
+  deploymentMethod: changesets
+  runtime: python3.7
+
+package:
+  patterns:
+    - "!*/**"
+    - "app.py"
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
+functions:
+  hello:
+    handler: app.hello
+    events:
+      - http:
+          path: /hello
+          method: GET
+  goodbye:
+    handler: app.goodbye
+    events:
+      - http:
+          path: /goodbye
+          method: GET
+  api:
+    handler: app.api
+    events:
+      - http:
+          path: /api/{proxy+}
+          method: ANY
