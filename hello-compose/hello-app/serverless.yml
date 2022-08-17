@@ -25,11 +25,31 @@ functions:
               querystrings:
                 foo: true
                 bar: false
+      - http:
+          path: /api/{id}
+          method: get
   hello3:
     handler: handler.hello
     events:
       - http:
           path: /hello/auth/{id}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                id: true
+              querystrings:
+                foo: true
+                bar: false
+                baz: true
+          authorizer:
+            type: aws_iam
+  hello4:
+    handler: handler.hello
+    events:
+      - http:
+          path: /hello/auth/2/{id}
           method: get
           cors: true
           request:
