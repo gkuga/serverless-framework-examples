@@ -1,0 +1,16 @@
+service: resources
+provider:
+  name: aws
+  runtime: python3.8
+frameworkVersion: "3"
+resources:
+  Resources:
+    s3:
+      Type: AWS::S3::Bucket
+  Outputs:
+    s3bucket:
+      Value:
+        Ref: s3
+      Export:
+        Name:
+          Fn::Sub: ${AWS::StackName}-bucket

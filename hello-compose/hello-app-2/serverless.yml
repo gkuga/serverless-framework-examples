@@ -1,16 +1,12 @@
-service: goodbye-app
+service: hello-app
 frameworkVersion: "3"
 useDotenv: true
-
-provider:
-  name: aws
-  runtime: python3.8
+provider: ${file(../provider.yml)}
 
 functions:
-  goodbye:
-    handler: handler.goodbye
+  hello:
+    handler: hello-app-2/handler.hello
     environment:
-      HELLO_API_URL: ${param:apiUrl}
       ENV_TEST: ${env:ENV_TEST}
     events:
       - httpApi:

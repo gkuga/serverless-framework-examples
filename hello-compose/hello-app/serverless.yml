@@ -1,12 +1,22 @@
 service: hello-app
 frameworkVersion: "3"
 
-provider:
-  name: aws
-  runtime: python3.8
+provider: ${file(../provider.yml)}
+
+resources:
+  Resources:
+    s3:
+      Type: AWS::S3::Bucket
+  Outputs:
+    s3bucket:
+      Value: 
+        Ref: s3
+      Export:
+        Name:
+          Fn::Sub: ${AWS::StackName}-SecGroup
 
 functions:
-  hello:
+  HttpApiUrl:
     handler: handler.hello
     events:
       - httpApi:
@@ -46,7 +56,7 @@ functions:
           authorizer:
             type: aws_iam
   hello4:
-    handler: handler.hello
+    handler: handler.auth
     events:
       - http:
           path: /hello/auth/2/{id}

@@ -1,6 +1,10 @@
 services:
+  resouces:
+    path: resources
   hello-app:
     path: hello-app
+  hello-app-2:
+    path: hello-app-2
   goodbye-app:
     path: goodbye-app
     params:
