@@ -3,18 +3,6 @@ frameworkVersion: "3"
 
 provider: ${file(../provider.yml)}
 
-resources:
-  Resources:
-    s3:
-      Type: AWS::S3::Bucket
-  Outputs:
-    s3bucket:
-      Value: 
-        Ref: s3
-      Export:
-        Name:
-          Fn::Sub: ${AWS::StackName}-SecGroup
-
 functions:
   HttpApiUrl:
     handler: handler.hello

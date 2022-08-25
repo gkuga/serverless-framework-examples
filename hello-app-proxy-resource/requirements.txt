@@ -4,50 +4,30 @@
 #
 #    pip-compile requirements.in
 #
-attrs==21.4.0
-    # via chalice
-blessed==1.19.0
-    # via inquirer
-botocore==1.26.10
-    # via chalice
-chalice==1.27.1
+aws-lambda-powertools==1.27.0
     # via -r requirements.in
-click==8.0.4
-    # via chalice
-importlib-metadata==4.8.3
-    # via click
-inquirer==2.8.0
-    # via chalice
+aws-xray-sdk==2.10.0
+    # via aws-lambda-powertools
+boto3==1.24.57
+    # via aws-lambda-powertools
+botocore==1.27.57
+    # via
+    #   aws-xray-sdk
+    #   boto3
+    #   s3transfer
+fastjsonschema==2.16.1
+    # via aws-lambda-powertools
 jmespath==0.10.0
     # via
+    #   boto3
     #   botocore
-    #   chalice
-mypy-extensions==0.4.3
-    # via chalice
 python-dateutil==2.8.2
     # via botocore
-python-editor==1.0.4
-    # via inquirer
-pyyaml==6.0
-    # via chalice
-readchar==2.0.1
-    # via inquirer
+s3transfer==0.6.0
+    # via boto3
 six==1.16.0
-    # via
-    #   blessed
-    #   chalice
-    #   python-dateutil
-typing-extensions==4.1.1
-    # via importlib-metadata
+    # via python-dateutil
 urllib3==1.26.11
     # via botocore
-wcwidth==0.2.5
-    # via blessed
-wheel==0.37.1
-    # via chalice
-zipp==3.6.0
-    # via importlib-metadata
-
-# The following packages are considered to be unsafe in a requirements file:
-# pip
-# setuptools
+wrapt==1.14.1
+    # via aws-xray-sdk

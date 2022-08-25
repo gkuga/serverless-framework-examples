@@ -1,11 +1,18 @@
-service: hello-app
+service: hello-app-2
 frameworkVersion: "3"
 useDotenv: true
-provider: ${file(../provider.yml)}
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: python3.7
 
+package:
+  patterns:
+    - "!*/**"
+    - "../goodbye-app/**"
 functions:
   hello:
-    handler: hello-app-2/handler.hello
+    handler: "goodbye-app/handler.goodbye"
     environment:
       ENV_TEST: ${env:ENV_TEST}
     events:

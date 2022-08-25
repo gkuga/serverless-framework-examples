@@ -1,22 +1,21 @@
 import json
 
 from aws_lambda_powertools.event_handler import APIGatewayRestResolver
-from aws_lambda_powertools.utilities.typing import LambdaContext
 
 app = APIGatewayRestResolver()
 
 
-@app.get("/")
+@app.route("/")
 def index():
     return {"hello": "world"}
 
 
-@app.get("/hello")
-def hello():
-    name: str = app.current_event.get_query_string_value(
-        name="name", default_value="")
+@app.route("/hello")
+def hello(event, context):
+    name = event.get("queryStringParameters", {}).get("Name", "World!")
     body = {
         "message": f'Hello {name}',
+        "input": event,
     }
 
     response = {"statusCode": 200, "body": json.dumps(body)}
@@ -24,8 +23,8 @@ def hello():
     return response
 
 
-@app.get("/api/<id>")
-def apiid(id: str):
+@app.get("/api/{id}/{proxy+}")
+def apiid(id):
     body = {
         'message': 'API path',
         'id': id,
@@ -36,8 +35,8 @@ def apiid(id: str):
     return response
 
 
-@app.get("/api/<id>/temp")
-def api():
+@app.get("/api/{proxy+}")
+def api(event, context):
     body = {
         "message": 'API path',
     }
@@ -45,7 +44,3 @@ def api():
     response = {"statusCode": 200, "body": json.dumps(body)}
 
     return response
-
-
-def lambda_handler(event: dict, context: LambdaContext) -> dict:
-    return app.resolve(event, context)

@@ -17,19 +17,19 @@ plugins:
   - serverless-python-requirements
 functions:
   hello:
-    handler: app.hello
+    handler: app.lambda_handler
     events:
       - http:
           path: /hello
           method: GET
   goodbye:
-    handler: app.goodbye
+    handler: app.lambda_handler
     events:
       - http:
           path: /goodbye
           method: GET
   api:
-    handler: app.api
+    handler: app.lambda_handler
     events:
       - http:
           path: /api/{proxy+}
